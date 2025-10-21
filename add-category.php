@@ -1,11 +1,8 @@
 <?php  
 session_start();
 
-# If the admin is logged in
-if (isset($_SESSION['user_id']) &&
-    isset($_SESSION['user_email'])) {
+if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) {
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,85 +10,136 @@ if (isset($_SESSION['user_id']) &&
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Add Category</title>
 
-    <!-- bootstrap 5 CDN-->
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+	<!-- Bootstrap 5 -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
 
-    <!-- bootstrap 5 Js bundle CDN-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
-
+	<style>
+		body {
+			background: linear-gradient(135deg, #74ABE2, #5563DE);
+			font-family: 'Poppins', sans-serif;
+			min-height: 100vh;
+			display: flex;
+			flex-direction: column;
+		}
+		.navbar {
+			background: rgba(255, 255, 255, 0.9);
+			box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+			border-radius: 10px;
+			margin-top: 10px;
+		}
+		.navbar-brand {
+			font-weight: bold;
+			color: #3347B0 !important;
+		}
+		.nav-link {
+			color: #333 !important;
+			font-weight: 500;
+			transition: 0.3s;
+		}
+		.nav-link:hover {
+			color: #007bff !important;
+			transform: translateY(-2px);
+		}
+		.form-container {
+			background: #fff;
+			border-radius: 20px;
+			box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+			padding: 40px;
+			max-width: 600px;
+			margin: 60px auto;
+			animation: fadeIn 0.8s ease-in-out;
+		}
+		h1 {
+			color: #3347B0;
+			font-weight: 600;
+		}
+		label {
+			font-weight: 500;
+		}
+		.btn-primary {
+			background-color: #3347B0;
+			border: none;
+			font-weight: 500;
+			padding: 10px 20px;
+			border-radius: 10px;
+			transition: 0.3s;
+		}
+		.btn-primary:hover {
+			background-color: #25338F;
+			transform: scale(1.05);
+		}
+		footer {
+			text-align: center;
+			margin-top: auto;
+			padding: 15px 0;
+			color: #fff;
+			font-weight: 500;
+		}
+		.alert {
+			border-radius: 10px;
+			font-weight: 500;
+		}
+		@keyframes fadeIn {
+			from {opacity: 0; transform: translateY(20px);}
+			to {opacity: 1; transform: translateY(0);}
+		}
+	</style>
 </head>
+
 <body>
 	<div class="container">
-		<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		  <div class="container-fluid">
-		    <a class="navbar-brand" href="admin.php">Admin</a>
-		    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-		      <span class="navbar-toggler-icon"></span>
-		    </button>
-		    <div class="collapse navbar-collapse" 
-		         id="navbarSupportedContent">
-		      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-		        <li class="nav-item">
-		          <a class="nav-link" 
-		             aria-current="page" 
-		             href="index.php">Store</a>
-		        </li>
-		        <li class="nav-item">
-		          <a class="nav-link" 
-		             href="add-book.php">Add Book</a>
-		        </li>
-		        <li class="nav-item">
-		          <a class="nav-link active" 
-		             href="add-category.php">Add Category</a>
-		        </li>
-		        <li class="nav-item">
-		          <a class="nav-link" 
-		             href="add-author.php">Add Author</a>
-		        </li>
-		        <li class="nav-item">
-		          <a class="nav-link" 
-		             href="logout.php">Logout</a>
-		        </li>
-		      </ul>
-		    </div>
-		  </div>
+		<!-- Navbar -->
+		<nav class="navbar navbar-expand-lg navbar-light">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="admin.php"><i class="bi bi-speedometer2 me-2"></i>Admin</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNav">
+					<ul class="navbar-nav ms-auto">
+						<li class="nav-item"><a class="nav-link" href="index.php">Store</a></li>
+						<li class="nav-item"><a class="nav-link" href="add-book.php">Add Book</a></li>
+						<li class="nav-item"><a class="nav-link active" href="add-category.php">Add Category</a></li>
+						<li class="nav-item"><a class="nav-link" href="add-author.php">Add Author</a></li>
+						<li class="nav-item"><a class="nav-link text-danger fw-bold" href="logout.php"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+					</ul>
+				</div>
+			</div>
 		</nav>
-     <form action="php/add-category.php"
-           method="post" 
-           class="shadow p-4 rounded mt-5"
-           style="width: 90%; max-width: 50rem;">
 
-     	<h1 class="text-center pb-5 display-4 fs-3">
-     		Add New Category
-     	</h1>
-     	<?php if (isset($_GET['error'])) { ?>
-          <div class="alert alert-danger" role="alert">
-			  <?=htmlspecialchars($_GET['error']); ?>
-		  </div>
-		<?php } ?>
-		<?php if (isset($_GET['success'])) { ?>
-          <div class="alert alert-success" role="alert">
-			  <?=htmlspecialchars($_GET['success']); ?>
-		  </div>
-		<?php } ?>
-     	<div class="mb-3">
-		    <label class="form-label">
-		           	Category Name
-		           </label>
-		    <input type="text" 
-		           class="form-control" 
-		           name="category_name">
+		<!-- Form -->
+		<div class="form-container shadow-lg">
+			<h1 class="text-center mb-4">Add New Category</h1>
+
+			<?php if (isset($_GET['error'])) { ?>
+				<div class="alert alert-danger"><?=htmlspecialchars($_GET['error']); ?></div>
+			<?php } ?>
+			<?php if (isset($_GET['success'])) { ?>
+				<div class="alert alert-success"><?=htmlspecialchars($_GET['success']); ?></div>
+			<?php } ?>
+
+			<form action="php/add-category.php" method="post">
+				<div class="mb-3">
+					<label for="category_name" class="form-label">Category Name</label>
+					<input type="text" class="form-control form-control-lg" id="category_name" name="category_name" placeholder="Enter category name...">
+				</div>
+
+				<div class="d-grid mt-4">
+					<button type="submit" class="btn btn-primary btn-lg">
+						<i class="bi bi-plus-circle me-2"></i>Add Category
+					</button>
+				</div>
+			</form>
 		</div>
 
-	    <button type="submit" 
-	            class="btn btn-primary">
-	            Add Category</button>
-     </form>
+		<footer>© 2025 Online Book Store — Designed with 💙</footer>
 	</div>
 </body>
 </html>
 
-<?php }else{
+<?php } else {
   header("Location: login.php");
   exit;
 } ?>
