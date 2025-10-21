@@ -1,5 +1,6 @@
 <?php  
 session_start();
+$admin_id = $_SESSION['user_id'];
 
 # If the admin is logged in
 if (isset($_SESSION['user_id']) &&
@@ -110,10 +111,11 @@ if (isset($_SESSION['user_id']) &&
                                             description,
                                             category_id,
                                             cover,
-                                            file)
-                         VALUES (?,?,?,?,?,?)";
+                                            file,
+											admin_id)
+                         VALUES (?,?,?,?,?,?,?)";
                 $stmt = $conn->prepare($sql);
-			    $res  = $stmt->execute([$title, $author, $description, $category, $book_cover_URL, $file_URL]);
+			    $res  = $stmt->execute([$title, $author, $description, $category, $book_cover_URL, $file_URL,$admin_id]);
 
 			/**
 		      If there is no error while 
