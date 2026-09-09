@@ -1,0 +1,36 @@
+# ==========================================================
+# Cloud Backup Runtime Files
+# ==========================================================
+
+# Temporary working data
+temp/*
+!temp/.gitkeep
+restore_temp/
+restore_temp*/
+verify/
+
+# Test / sandbox data
+restore_sandbox/
+restore_fault_sandbox/
+cloud_fail_sandbox/
+
+# Runtime logs
+logs/*.log
+
+# Generated backup files
+*.zip
+*.sha256
+*.sql
+
+# Third-party binary
+scripts/rclone.exe
+
+# Rclone credentials - NEVER commit
+rclone.conf
+
+# PowerShell temporary files
+*.tmp
+
+# Windows
+Thumbs.db
+Desktop.ini
