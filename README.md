@@ -19,3 +19,14 @@ Tên : Lương Quốc An
 11. Test Results
 12. Security
 13. Hướng dẫn chạy
+
+| Test                   | Kết quả                 |
+| ---------------------- | ----------------------- |
+| Database + file backup | PASS                    |
+| SHA-256 verification   | PASS                    |
+| Database restore       | PASS                    |
+| 13/13 Uploads restore  | PASS                    |
+| Scheduler automation   | PASS                    |
+| MySQL unavailable      | PASS – exit 1           |
+| Corrupted checksum     | PASS – restore rejected |
+| Cloud unavailable      | PASS – restore rejected |
